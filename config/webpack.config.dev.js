@@ -27,73 +27,36 @@ module.exports = {
     publicPath: publicPath
   },
   resolve: {
-    fallback: paths.nodePaths,
-    extensions: ['.js', '.json', '.jsx', ''],
+    extensions: ['.js', '.json', '.jsx'],
     alias: {
       'react-native': 'react-native-web'
     }
   },
-  
   module: {
-    preLoaders: [
+    rules: [
       {
-        test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        include: paths.appSrc,
-      }
-    ],
-    loaders: [
-      {
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)(\?.*)?$/,
-          /\.css$/,
-          /\.json$/,
-          /\.svg$/
-        ],
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+        test: /\.s?css$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
       },
       {
-        test: /\.(js|jsx)$/,
-        include: paths.appSrc,
-        loader: 'babel-loader',
-        presets: ['es2015'],
-        query: {
-          cacheDirectory: true
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css?importLoaders=1!postcss'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.svg$/,
-        loader: 'file',
-        query: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [{
+          loader:"babel-loader",
+          options: {
+            presets: [
+              "es2015",
+              "stage-2",
+              "react"
+            ]
+          }
+        }]
       }
     ]
-  },
-  postcss: function() {
-    return [
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ]
-      }),
-    ];
   },
   plugins: [
     new InterpolateHtmlPlugin(env.raw),
@@ -110,5 +73,9 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
+  },
+  devServer: {
+    disableHostCheck: true,
+    public: 'https://boilerplate-shouulysses.c9users.io'
   }
 };

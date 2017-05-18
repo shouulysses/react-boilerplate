@@ -19,10 +19,10 @@ describe('Testing Company methods', () => {
     testUser.save(function(err){
       if(err) throw err;
     })
-    User.findOne({email: 'test@test.com'}, function(err, user){
+    User.findOne({email: 'test@test.com'}, (err, user) => {
       if(err) throw err;
       // test a matching password
-      user.comparePassword('12345678', function(err, isMatch) {
+      user.comparePassword('12345678', (err, isMatch) => {
           if (err) throw err;
           expect(isMatch).to.be(true)
       });
@@ -32,13 +32,20 @@ describe('Testing Company methods', () => {
     testUser.save(function(err){
       if(err) throw err;
     })
-    User.findOne({email: 'test@test.com'}, function(err, user){
+    User.findOne({email: 'test@test.com'}, (err, user) => {
       if(err) throw err;
       // test a matching password
-      user.comparePassword('87654321', function(err, isMatch) {
+      user.comparePassword('87654321', (err, isMatch) => {
           if (err) throw err;
           expect(isMatch).to.be(false)
       });
     })
+  })
+  it('Test login method', function* () {
+    testUser.save(function(err){
+      if(err) throw err;
+    })
+    let result = User.login('test@test.com', 12345678);
+    expect(result).to.be(true);
   })
 })
