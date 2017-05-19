@@ -4,8 +4,8 @@ import App from './client/container/App';
 import Homepage from './client/pages/homepage';
 import About from './client/pages/about';
 
-export default (
-  <Route 
+export default(
+  <Route
     onChange={(prevState, nextState) => {
       if (nextState.location.action !== 'POP') window.scrollTo(0, 0);
     }}
@@ -15,5 +15,3 @@ export default (
     <Route path="/about" components={{ main: About }} />
   </Route>
 );
-
-console.log('route')

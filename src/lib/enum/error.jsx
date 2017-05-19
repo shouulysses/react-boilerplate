@@ -3,7 +3,7 @@ const ERROR_TYPE = {
   INTERNAL: 'internal'
 };
 
-export const ErrorEnum = {
+const ErrorEnum = {
   INVALID_PAYLOAD: {
     type: ERROR_TYPE.USER,
     status: 400,
@@ -22,6 +22,8 @@ export const ErrorEnum = {
   PASSWORD_NOT_MATCH: {
     type: ERROR_TYPE.USER,
     status: 403,
-    message: 'password does not match' 
+    message: 'password does not match'
   }
 };
+
+module.exports = ErrorEnum;
