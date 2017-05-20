@@ -1,0 +1,21 @@
+$steps: 1 2 3 4 5;
+
+$margin: 1rem;
+
+@each $step in $steps {
+  .mt#{$step}{
+    margin-top: $margin * $step;
+  }
+  
+  .mr#{$step}{
+    margin-right: $margin * $step;
+  }
+  
+  .mb#{$step}{
+    margin-bottom: $margin * $step;
+  }
+  
+  .ml#{$step}{
+    margin-left: $margin * $step;
+  }
+}
